@@ -13,7 +13,7 @@
     "bespoke-touch": "^1.0.0",
     "debowerify": "^1.2.0",
     "gh-pages": "^0.2.0",
-    "gulp": "^3.8.1",
+    "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-browserify": "^0.5.0",
     "gulp-connect": "^2.0.5",
