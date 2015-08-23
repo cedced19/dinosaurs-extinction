@@ -1,6 +1,4 @@
 node_modules
 bower_components
-dist/build
-dist/images
-dist/index.html
+dist
 bespoke-theme-*

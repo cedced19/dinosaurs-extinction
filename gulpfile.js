@@ -38,6 +38,14 @@ gulp.task('html', ['clean:html'], function() {
     .pipe(connect.reload());
 });
 
+gulp.task('docs-html', ['clean:html'], function() {
+  return gulp.src('src/**/*.html')
+    .pipe(isDist ? through() : plumber())
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist'))
+    .pipe(connect.reload());
+});
+
 gulp.task('css', ['clean:css'], function() {
   return gulp.src('src/styles/main.styl')
     .pipe(isDist ? through() : plumber())
@@ -90,6 +98,7 @@ gulp.task('connect', ['build'], function(done) {
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*.jade', ['html']);
+  gulp.watch('src/**/*.html', ['docs-html']);
   gulp.watch('src/styles/**/*.styl', ['css']);
   gulp.watch('src/images/**/*', ['images']);
   gulp.watch([
@@ -102,6 +111,6 @@ gulp.task('deploy', ['build'], function(done) {
   ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log }, done);
 });
 
-gulp.task('build', ['js', 'html', 'css', 'images']);
+gulp.task('build', ['js', 'html', 'css', 'images', 'docs-html']);
 gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', ['build']);
